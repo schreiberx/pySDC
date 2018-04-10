@@ -247,3 +247,132 @@ class rhs_imex_mesh(object):
         me.expl.values = A.dot(self.expl.values)
 
         return me
+
+
+class rhs_3comp_mesh(object):
+    """
+    RHS data type for meshes with three components
+
+    This data type can be used to have RHS with 3 components (e.g. for multi-implicit sweepers)
+
+    Attributes:
+        comp1 (mesh.mesh): first component
+        comp2 (mesh.mesh): second component
+        comp3 (mesh.mesh): third component
+    """
+
+    def __init__(self, init):
+        """
+        Initialization routine
+
+        Args:
+            init: can either be a tuple (one int per dimension) or a number (if only one dimension is requested)
+                  or another rhs_3comp_mesh object
+        Raises:
+            DataError: if init is none of the types above
+        """
+
+        # if init is another rhs_imex_mesh, do a deepcopy (init by copy)
+        if isinstance(init, type(self)):
+            self.comp1 = mesh(init.comp1)
+            self.comp2 = mesh(init.comp2)
+            self.comp3 = mesh(init.comp3)
+        # if init is a number or a tuple of numbers, create mesh object with None as initial value
+        elif isinstance(init, tuple) or isinstance(init, int):
+            self.comp1 = mesh(init)
+            self.comp2 = mesh(init)
+            self.comp3 = mesh(init)
+        # something is wrong, if none of the ones above hit
+        else:
+            raise DataError('something went wrong during %s initialization' % type(self))
+
+    def __sub__(self, other):
+        """
+        Overloading the subtraction operator for rhs types
+
+        Args:
+            other (mesh.rhs_3comp_mesh): rhs object to be subtracted
+        Raises:
+            DataError: if other is not a rhs object
+        Returns:
+            mesh.rhs_3comp_mesh: differences between caller and other values (self-other)
+        """
+
+        if isinstance(other, rhs_3comp_mesh):
+            # always create new rhs_3comp_mesh, since otherwise c = a - b changes a as well!
+            me = rhs_3comp_mesh(np.shape(self.comp1.values))
+            me.comp1.values = self.comp1.values - other.comp1.values
+            me.comp2.values = self.comp2.values - other.comp2.values
+            me.comp3.values = self.comp3.values - other.comp3.values
+            return me
+        else:
+            raise DataError("Type error: cannot subtract %s from %s" % (type(other), type(self)))
+
+    def __add__(self, other):
+        """
+         Overloading the addition operator for rhs types
+
+        Args:
+            other (mesh.rhs_3comp_mesh): rhs object to be added
+        Raises:
+            DataError: if other is not a rhs object
+        Returns:
+            mesh.rhs_3comp_mesh: sum of caller and other values (self-other)
+        """
+
+        if isinstance(other, rhs_3comp_mesh):
+            # always create new rhs_3comp_mesh, since otherwise c = a + b changes a as well!
+            me = rhs_3comp_mesh(np.shape(self.comp1.values))
+            me.comp1.values = self.comp1.values + other.comp1.values
+            me.comp2.values = self.comp2.values + other.comp2.values
+            me.comp3.values = self.comp3.values + other.comp3.values
+            return me
+        else:
+            raise DataError("Type error: cannot add %s to %s" % (type(other), type(self)))
+
+    def __rmul__(self, other):
+        """
+        Overloading the right multiply by factor operator for mesh types
+
+        Args:
+            other (float): factor
+        Raises:
+            DataError: is other is not a float
+        Returns:
+             mesh.rhs_3comp_mesh: copy of original values scaled by factor
+        """
+
+        if isinstance(other, float):
+            # always create new rhs_3comp_mesh
+            me = rhs_3comp_mesh(np.shape(self.comp1.values))
+            me.comp1.values = other * self.comp1.values
+            me.comp2.values = other * self.comp2.values
+            me.comp3.values = other * self.comp3.values
+            return me
+        else:
+            raise DataError("Type error: cannot multiply %s to %s" % (type(other), type(self)))
+
+    def apply_mat(self, A):
+        """
+        Matrix multiplication operator
+
+        Args:
+            A: a matrix
+
+        Returns:
+            mesh.rhs_3comp_mesh: each component multiplied by the matrix A
+        """
+
+        if not A.shape[1] == self.comp1.values.shape[0]:
+            raise DataError("ERROR: cannot apply operator %s to %s" % (A, self.comp1))
+        if not A.shape[1] == self.comp2.values.shape[0]:
+            raise DataError("ERROR: cannot apply operator %s to %s" % (A, self.comp2))
+        if not A.shape[1] == self.comp3.values.shape[0]:
+            raise DataError("ERROR: cannot apply operator %s to %s" % (A, self.comp3))
+
+        me = rhs_3comp_mesh(A.shape[1])
+        me.comp1.values = A.dot(self.comp1.values)
+        me.comp2.values = A.dot(self.comp2.values)
+        me.comp3.values = A.dot(self.comp3.values)
+
+        return me
