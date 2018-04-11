@@ -140,7 +140,7 @@ class rhs_imex_mesh(object):
         expl (mesh.mesh): explicit part
     """
 
-    def __init__(self, init):
+    def __init__(self, init=None, val=None):
         """
         Initialization routine
 
@@ -157,8 +157,8 @@ class rhs_imex_mesh(object):
             self.expl = mesh(init.expl)
         # if init is a number or a tuple of numbers, create mesh object with None as initial value
         elif isinstance(init, tuple) or isinstance(init, int):
-            self.impl = mesh(init)
-            self.expl = mesh(init)
+            self.impl = mesh(init, val=val)
+            self.expl = mesh(init, val=val)
         # something is wrong, if none of the ones above hit
         else:
             raise DataError('something went wrong during %s initialization' % type(self))
@@ -261,7 +261,7 @@ class rhs_3comp_mesh(object):
         comp3 (mesh.mesh): third component
     """
 
-    def __init__(self, init):
+    def __init__(self, init=None, val=None):
         """
         Initialization routine
 
@@ -279,9 +279,9 @@ class rhs_3comp_mesh(object):
             self.comp3 = mesh(init.comp3)
         # if init is a number or a tuple of numbers, create mesh object with None as initial value
         elif isinstance(init, tuple) or isinstance(init, int):
-            self.comp1 = mesh(init)
-            self.comp2 = mesh(init)
-            self.comp3 = mesh(init)
+            self.comp1 = mesh(init, val=val)
+            self.comp2 = mesh(init, val=val)
+            self.comp3 = mesh(init, val=val)
         # something is wrong, if none of the ones above hit
         else:
             raise DataError('something went wrong during %s initialization' % type(self))

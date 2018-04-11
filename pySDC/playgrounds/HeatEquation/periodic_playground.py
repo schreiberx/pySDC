@@ -19,13 +19,13 @@ def main():
     """
 
     # set up number of parallel time-steps to run PFASST with
-    num_proc = 16
+    num_proc = 1
 
     # initialize level parameters
     level_params = dict()
-    level_params['restol'] = 1E-08
-    level_params['dt'] = 1.0 / num_proc
-    level_params['nsweeps'] = [3]
+    level_params['restol'] = 1E-10
+    level_params['dt'] = 0.125
+    level_params['nsweeps'] = [1]
 
     # initialize sweeper parameters
     sweeper_params = dict()
@@ -36,8 +36,8 @@ def main():
 
     # initialize problem parameters
     problem_params = dict()
-    problem_params['nu'] = 0.1  # diffusion coefficient
-    problem_params['freq'] = 4  # frequency for the test value
+    problem_params['nu'] = 0.01  # diffusion coefficient
+    problem_params['freq'] = 2  # frequency for the test value
     problem_params['nvars'] = [128]  # number of degrees of freedom for each level
 
     # initialize step parameters
@@ -52,7 +52,7 @@ def main():
 
     # initialize controller parameters
     controller_params = dict()
-    controller_params['logger_level'] = 30
+    controller_params['logger_level'] = 20
     # controller_params['predict'] = False
     # controller_params['hook_class'] = error_output
 
