@@ -1,0 +1,275 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome to pySDC! &#8212; pySDC 2 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Step-1: A first spatial problem" href="tutorial/step_1.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/step_1.html" title="Step-1: A first spatial problem"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pySDC 2 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-pysdc">
+<h1>Welcome to pySDC!<a class="headerlink" href="#welcome-to-pysdc" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>pySDC</cite> project is a Python implementation of the spectral deferred correction (SDC) approach and its flavors,
+esp. the multilevel extension MLSDC and PFASST. It is intended for rapid prototyping and educational purposes.
+New ideas like e.g. sweepers or predictors can be tested and first toy problems can be easily implemented.</p>
+<p>The code is hosted on GitHub, see <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC">https://github.com/Parallel-in-Time/pySDC</a>, and PyPI, see <a class="reference external" href="https://pypi.python.org/pypi/pySDC">https://pypi.python.org/pypi/pySDC</a>.</p>
+<div class="section" id="news">
+<h2>News<a class="headerlink" href="#news" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>February 8, 2018: Ever got annoyed at <cite>pySDC</cite>’s incredibly slow setup phase when multiple time-steps are used? Version 2.3
+changes this by copying the data structure of the first step to all other steps using the <a class="reference external" href="https://pypi.python.org/pypi/dill">dill Package</a>.
+Setup times could be reduced by 90% and more for certain problems. We also increase the speed for certain calculations,
+in particular for the Penning trap example.</li>
+<li>November 7, 2017: Version 2.2 contains matrix-based versions of PFASST within the project <code class="docutils literal"><span class="pre">matrixPFASST</span></code>. This involved quite a few
+changes in more or less unexpected places, e.g. in the multigrid controller and the transfer base class. The impact
+of these changes on other projects should be negligible, though.</li>
+<li>October 25, 2017: For the <a class="reference external" href="https://www.ics.usi.ch/index.php/6th-workshop-on-parallel-in-time-methods">6th Workshop on Parallel-in-Time Integration</a>
+<cite>pySDC</cite> has been updated to version 2.1. It is now available on PyPI - the Python Package Index, see <a class="reference external" href="https://pypi.python.org/pypi/pySDC">https://pypi.python.org/pypi/pySDC</a>
+and can be installed simply by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pySDC</span></code>. Naturally, this release contains a lot of bugfixes and minor improvements.
+Most notably, the file structure has been changed again to meet the standards for Python packaging (at least a bit).</li>
+<li>November 24, 2016: Released version 2 of <cite>pySDC</cite>. This release contains major changes to the code and its structure:<ul>
+<li><strong>Complete redesign of code structure</strong>: The <code class="docutils literal"><span class="pre">core</span></code> part of <cite>pySDC</cite> only contains the core modules and classes,
+while <code class="docutils literal"><span class="pre">implementations</span></code> contains the actual implementations necessary to run something.
+This now includes separate files for all collocation classes, as well as a collection of problems, transfer classes and so on.
+Most examples have been ported to either <code class="docutils literal"><span class="pre">tutorials</span></code>, <code class="docutils literal"><span class="pre">playgrounds</span></code> or <code class="docutils literal"><span class="pre">projects</span></code>.</li>
+<li><strong>Introduction of tutorials</strong>: We added a tutorial (see below) to explain many
+of pySDC’s features in a step-by-step fashion. We start with a simple spatial
+discretization and collocation formulations and move step by step to SDC, MLSDC and PFASST.
+All tutorials are accompanied by tests.</li>
+<li><strong>New all-inclusive controllers</strong>: Instead of having two PFASST controllers
+which could also do SDC and MLSDC (and more), we now have four generic controllers
+which can do all these methods, depending on the input. They are split into
+two by two class: <cite>MPI</cite> and <cite>NonMPI</cite> for real or virtual parallelisim as well
+as <cite>classic</cite> and <cite>multigrid</cite> for the standard and multigrid-like implementation
+of PFASST and the likes. Initialization has been simplified a lot, too.</li>
+<li><strong>Collocation-based coarsening</strong> As the standard PFASST libraries <a class="reference external" href="https://bitbucket.org/memmett/libpfasst">libpfasst</a> and <a class="reference external" href="https://github.com/Parallel-in-Time/PFASST">PFASST++</a>
+<cite>pySDC</cite> now offers collocation-based coarsening, i.e. the number of collocation nodes can be reduced during coarsening.
+Also, time-step coarsening is in preparation, but not implemented yet.</li>
+<li><strong>Testing and documentation</strong> The core, implementations and plugin packages and their subpackages are fully documented using sphinx-apidoc, see below.
+This documentation as well as this website are generated automatically using <a class="reference external" href="https://travis-ci.org/Parallel-in-Time/pySDC">Travis-CI</a>.
+Most of the code is supported by tests, mainly realized by using the tutorial as the test routines with clearly defined results. Also, projects are accompanied by tests.</li>
+<li>Further, minor changes:<ul>
+<li>Switched to more stable barycentric interpolation for the quadrature weights</li>
+<li>New collocation class: <cite>EquidistantSpline_Right</cite> for spline-based quadrature</li>
+<li>Collocation tests are realized by generators and not by classes</li>
+<li>Multi-step SDC (aka single-level PFASST) now works as expected</li>
+<li>Reworked many of the internal structures for consistency and simplicity</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<p>To flatten the steep learning curve of SDC and the likes, this tutorial contains seven steps to introduce, demonstrate and briefly discuss the main features of pySDC.
+We start with a simple problem setup, add the collocation problem, solve this via SDC, MLSDC and finally PFASST and discuss further extensions.
+Along the way we highlight special features of pySDC and explain how different features or implementations can be used (or disabled).</p>
+<p>All tutorials are supported by tests and are run automatically after pushing to master. The results are shown within the description and can be found here:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/step_1.html">Step-1: A first spatial problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/step_2.html">Step-2: Data structures and my first sweeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/step_3.html">Step-3: Statistics and a new sweeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/step_4.html">Step-4: Multilevel SDC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/step_5.html">Step-5: PFASST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/step_6.html">Step-6: Advanced PFASST controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/step_7.html">Step-7: Advanced topics</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="playgrounds">
+<h2>Playgrounds<a class="headerlink" href="#playgrounds" title="Permalink to this headline">¶</a></h2>
+<p>This folder gathers various small to medium experiments done with pySDC. They are for example grouped by application (e.g. <code class="docutils literal"><span class="pre">Boris</span></code>) or by problem type (e.g. <code class="docutils literal"><span class="pre">ODEs</span></code>).
+Also, the <code class="docutils literal"><span class="pre">deprecated</span></code> folder lists a few old applications which have not been ported to the current version of pySDC.
+Experiments which become more complex or which eventually evolve into a publication of any form should go to the <code class="docutils literal"><span class="pre">projects</span></code> folder and should receive proper documentation and description.
+The playground codes are supposed to be cleaned up (PEP8 is tested), but there is no detailed documentation available.</p>
+</div>
+<div class="section" id="projects">
+<h2>Projects<a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
+<p>In the <code class="docutils literal"><span class="pre">projects</span></code> folder we gather focussed experiments with pySDC which go beyond simple toy problems or feature tests.
+In particular, projects are structured and documented codes which form the basis for publications or presentations.
+All projects are expected to contain a README file describing the intention and content of the work.
+Parts of the Python scripts are supported by tests and checked for PEP8 conformity.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="projects/parallelSDC.html">Attempts to parallelize SDC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="projects/parallelSDC.html#different-preconditioners-for-sdc">Different preconditioners for SDC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/parallelSDC.html#simplified-newton-for-nonlinear-problems">Simplified Newton for nonlinear problems</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projects/node_failure.html">Fault-tolerance with PFASST: node failures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="projects/node_failure.html#propagation-of-a-single-node-failure">Propagation of a single node failure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/node_failure.html#node-failures-at-different-steps-and-iterations">Node failures at different steps and iterations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/node_failure.html#the-boussinesq-test-case">The Boussinesq test case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/node_failure.html#the-gray-scott-test-case">The Gray-Scott test case</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projects/fwsw.html">Fast-Wave-Slow-Wave SDC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="projects/fwsw.html#theoretical-results">Theoretical results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/fwsw.html#acoustic-advection-example">Acoustic-advection example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/fwsw.html#boussinesq-example">Boussinesq example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projects/RDC.html">RDC: Rational Deferred Corrections</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="projects/RDC.html#testing-rdc-convergence">Testing RDC convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/RDC.html#multi-level-rdc-and-pfasst-with-rdc">Multi-level RDC and PFASST with RDC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projects/asymp_conv.html">Asymptotic convergence of PFASST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="projects/asymp_conv.html#organisation-of-the-project">Organisation of the project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projects/matrixPFASST.html">Matrix-based versions of PFASST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="projects/matrixPFASST.html#matrix-based-pfasst">Matrix-based PFASST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/matrixPFASST.html#propagator-based-pfasst">Propagator-based PFASST</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projects/Hamiltonian.html">Second-order Problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="projects/Hamiltonian.html#simple-problems">Simple problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/Hamiltonian.html#solar-system-problem">Solar system problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projects/Hamiltonian.html#fermi-pasta-ulam-tsingou-problem">Fermi-Pasta-Ulam-Tsingou problem</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h2>
+<p>Most of the code is supported by tests, mainly realized by using the tutorial as the test routines with clearly defined results. Also, projects are accompanied by tests.</p>
+<p>Travis-CI reports: <a class="reference external" href="https://travis-ci.org/Parallel-in-Time/pySDC"><img alt="badge" src="https://travis-ci.org/Parallel-in-Time/pySDC.svg?branch=master" /></a>, test coverage results can be found <a class="reference external" href="test_coverage/index.html">here</a>.</p>
+</div>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The Python files contained in <code class="docutils literal"><span class="pre">core</span></code>, <code class="docutils literal"><span class="pre">implementations</span></code> and <code class="docutils literal"><span class="pre">helpers</span></code> are fully documented and their API is generated automatically with sphinx-apidoc after each update.
+The API (as well as the tutorial pages) can also be generated manually and locally by executing</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>&gt; ./docs/update_apidocs.sh
+&gt; nosetests -v --with-coverage --cover-erase --cover-inclusive --cover-package=pySDC/core,pySDC/implementations,pySDC/helpers,pySDC/tutorial --cover-html --cover-html-dir=target/doc/build/test_coverage pySDC/tests
+&gt; travis-sphinx build
+</pre></div>
+</div>
+<p>in the root directory. Then, the main index can be found in <code class="docutils literal"><span class="pre">target/doc/build/index.html</span></code>. Anyway, here is the online version:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pySDC/core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pySDC/implementations.html">implementations package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pySDC/helpers.html">helpers package</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to pySDC!</a><ul>
+<li><a class="reference internal" href="#news">News</a></li>
+<li><a class="reference internal" href="#tutorial">Tutorial</a></li>
+<li><a class="reference internal" href="#playgrounds">Playgrounds</a></li>
+<li><a class="reference internal" href="#projects">Projects</a></li>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+<li><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial/step_1.html"
+                        title="next chapter">Step-1: A first spatial problem</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/step_1.html" title="Step-1: A first spatial problem"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pySDC 2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Robert Speck.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

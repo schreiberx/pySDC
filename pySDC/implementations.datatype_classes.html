@@ -1,0 +1,397 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>implementations.datatype_classes package &#8212; pySDC 2 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="implementations.problem_classes package" href="implementations.problem_classes.html" />
+    <link rel="prev" title="implementations.controller_classes package" href="implementations.controller_classes.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="implementations.problem_classes.html" title="implementations.problem_classes package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="implementations.controller_classes.html" title="implementations.controller_classes package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="implementations.html" accesskey="U">implementations package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="implementations-datatype-classes-package">
+<h1>implementations.datatype_classes package<a class="headerlink" href="#implementations-datatype-classes-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-implementations.datatype_classes.complex_mesh">
+<span id="implementations-datatype-classes-complex-mesh-module"></span><h2>implementations.datatype_classes.complex_mesh module<a class="headerlink" href="#module-implementations.datatype_classes.complex_mesh" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="implementations.datatype_classes.complex_mesh.mesh">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.complex_mesh.</code><code class="descname">mesh</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/complex_mesh.html#mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.complex_mesh.mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Mesh data type with arbitrary dimensions and complex datay</p>
+<p>This data type can be used whenever structured data with a single unknown per point in space is required</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.complex_mesh.mesh.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.complex_mesh.mesh.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – contains the ndarray of the values</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.complex_mesh.rhs_imex_mesh">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.complex_mesh.</code><code class="descname">rhs_imex_mesh</code><span class="sig-paren">(</span><em>init</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/complex_mesh.html#rhs_imex_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.complex_mesh.rhs_imex_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>RHS data type for meshes with implicit and explicit components</p>
+<p>This data type can be used to have RHS with 2 components (here implicit and explicit)</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.complex_mesh.rhs_imex_mesh.impl">
+<code class="descname">impl</code><a class="headerlink" href="#implementations.datatype_classes.complex_mesh.rhs_imex_mesh.impl" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>complex_mesh.mesh</em> – implicit part</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="implementations.datatype_classes.complex_mesh.rhs_imex_mesh.expl">
+<code class="descname">expl</code><a class="headerlink" href="#implementations.datatype_classes.complex_mesh.rhs_imex_mesh.expl" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>complex_mesh.mesh</em> – explicit part</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-implementations.datatype_classes.fenics_mesh">
+<span id="implementations-datatype-classes-fenics-mesh-module"></span><h2>implementations.datatype_classes.fenics_mesh module<a class="headerlink" href="#module-implementations.datatype_classes.fenics_mesh" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="implementations.datatype_classes.fenics_mesh.fenics_mesh">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.fenics_mesh.</code><code class="descname">fenics_mesh</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/fenics_mesh.html#fenics_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.fenics_mesh.fenics_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Mesh data type with arbitrary dimensions</p>
+<p>This data type can be used whenever structured data with a single unknown per point in space is required</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.fenics_mesh.fenics_mesh.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.fenics_mesh.fenics_mesh.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – contains the ndarray of the values</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="implementations.datatype_classes.fenics_mesh.fenics_mesh.V">
+<code class="descname">V</code><a class="headerlink" href="#implementations.datatype_classes.fenics_mesh.fenics_mesh.V" title="Permalink to this definition">¶</a></dt>
+<dd><p>function space</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.fenics_mesh.rhs_fenics_mesh">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.fenics_mesh.</code><code class="descname">rhs_fenics_mesh</code><span class="sig-paren">(</span><em>init</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/fenics_mesh.html#rhs_fenics_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.fenics_mesh.rhs_fenics_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>RHS data type for meshes with implicit and explicit components</p>
+<p>This data type can be used to have RHS with 2 components (here implicit and explicit)</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.fenics_mesh.rhs_fenics_mesh.impl">
+<code class="descname">impl</code><a class="headerlink" href="#implementations.datatype_classes.fenics_mesh.rhs_fenics_mesh.impl" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>fenics_mesh</em> – implicit part</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="implementations.datatype_classes.fenics_mesh.rhs_fenics_mesh.expl">
+<code class="descname">expl</code><a class="headerlink" href="#implementations.datatype_classes.fenics_mesh.rhs_fenics_mesh.expl" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>fenics_mesh</em> – explicit part</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-implementations.datatype_classes.mesh">
+<span id="implementations-datatype-classes-mesh-module"></span><h2>implementations.datatype_classes.mesh module<a class="headerlink" href="#module-implementations.datatype_classes.mesh" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="implementations.datatype_classes.mesh.mesh">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.mesh.</code><code class="descname">mesh</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/mesh.html#mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.mesh.mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Mesh data type with arbitrary dimensions</p>
+<p>This data type can be used whenever structured data with a single unknown per point in space is required</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.mesh.mesh.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.mesh.mesh.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – contains the ndarray of the values</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="implementations.datatype_classes.mesh.mesh.apply_mat">
+<code class="descname">apply_mat</code><span class="sig-paren">(</span><em>A</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/mesh.html#mesh.apply_mat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.mesh.mesh.apply_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matrix multiplication operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>A</strong> – a matrix</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">component multiplied by the matrix A</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#implementations.datatype_classes.mesh.mesh" title="implementations.datatype_classes.mesh.mesh">mesh.mesh</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.mesh.rhs_imex_mesh">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.mesh.</code><code class="descname">rhs_imex_mesh</code><span class="sig-paren">(</span><em>init</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/mesh.html#rhs_imex_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.mesh.rhs_imex_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>RHS data type for meshes with implicit and explicit components</p>
+<p>This data type can be used to have RHS with 2 components (here implicit and explicit)</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.mesh.rhs_imex_mesh.impl">
+<code class="descname">impl</code><a class="headerlink" href="#implementations.datatype_classes.mesh.rhs_imex_mesh.impl" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>mesh.mesh</em> – implicit part</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="implementations.datatype_classes.mesh.rhs_imex_mesh.expl">
+<code class="descname">expl</code><a class="headerlink" href="#implementations.datatype_classes.mesh.rhs_imex_mesh.expl" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>mesh.mesh</em> – explicit part</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="implementations.datatype_classes.mesh.rhs_imex_mesh.apply_mat">
+<code class="descname">apply_mat</code><span class="sig-paren">(</span><em>A</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/mesh.html#rhs_imex_mesh.apply_mat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.mesh.rhs_imex_mesh.apply_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matrix multiplication operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>A</strong> – a matrix</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">each component multiplied by the matrix A</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#implementations.datatype_classes.mesh.rhs_imex_mesh" title="implementations.datatype_classes.mesh.rhs_imex_mesh">mesh.rhs_imex_mesh</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-implementations.datatype_classes.particles">
+<span id="implementations-datatype-classes-particles-module"></span><h2>implementations.datatype_classes.particles module<a class="headerlink" href="#module-implementations.datatype_classes.particles" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="implementations.datatype_classes.particles.acceleration">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.particles.</code><code class="descname">acceleration</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/particles.html#acceleration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.particles.acceleration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Acceleration data type for particles in 3 dimensions</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.acceleration.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.particles.acceleration.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – array with 3 acceleration values per particle (dim. 3*nparts)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.particles.fields">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.particles.</code><code class="descname">fields</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/particles.html#fields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.particles.fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Field data type for 3 dimensions</p>
+<p>This data type can be used for electric and magnetic fields in 3 dimensions</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.fields.elec">
+<code class="descname">elec</code><a class="headerlink" href="#implementations.datatype_classes.particles.fields.elec" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains the electric field</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.fields.magn">
+<code class="descname">magn</code><a class="headerlink" href="#implementations.datatype_classes.particles.fields.magn" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains the magnetic field</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.particles.fields.electric">
+<em class="property">class </em><code class="descname">electric</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/particles.html#fields.electric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.particles.fields.electric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Electric field data type in 3 dimensions</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.fields.electric.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.particles.fields.electric.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – array with 3 field values per particle (dim. 3*nparts)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.particles.fields.magnetic">
+<em class="property">class </em><code class="descname">magnetic</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/particles.html#fields.magnetic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.particles.fields.magnetic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Magnetic field data type in 3 dimensions</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.fields.magnetic.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.particles.fields.magnetic.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – array with 3 field values per particle (dim. 3*nparts)</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.particles.particles">
+<em class="property">class </em><code class="descclassname">implementations.datatype_classes.particles.</code><code class="descname">particles</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/particles.html#particles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.particles.particles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Particle data type for particles in 3 dimensions</p>
+<p>This data type can be used for particles in 3 dimensions with 3 position and 3 velocity values per particle</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.particles.pos">
+<code class="descname">pos</code><a class="headerlink" href="#implementations.datatype_classes.particles.particles.pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains the positions of all particles</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.particles.vel">
+<code class="descname">vel</code><a class="headerlink" href="#implementations.datatype_classes.particles.particles.vel" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains the velocities of all particles</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.particles.particles.position">
+<em class="property">class </em><code class="descname">position</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/particles.html#particles.position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.particles.particles.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Position data type for particles in 3 dimensions</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.particles.position.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.particles.particles.position.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – array with 3 position values per particle (dim. 3*nparts)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="implementations.datatype_classes.particles.particles.velocity">
+<em class="property">class </em><code class="descname">velocity</code><span class="sig-paren">(</span><em>init=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/implementations/datatype_classes/particles.html#particles.velocity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#implementations.datatype_classes.particles.particles.velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Velocity data type for particles in 3 dimensions</p>
+<dl class="attribute">
+<dt id="implementations.datatype_classes.particles.particles.velocity.values">
+<code class="descname">values</code><a class="headerlink" href="#implementations.datatype_classes.particles.particles.velocity.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.ndarray</em> – array with 3 velocity values per particle (dim. 3*nparts)</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-implementations.datatype_classes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-implementations.datatype_classes" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">implementations.datatype_classes package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-implementations.datatype_classes.complex_mesh">implementations.datatype_classes.complex_mesh module</a></li>
+<li><a class="reference internal" href="#module-implementations.datatype_classes.fenics_mesh">implementations.datatype_classes.fenics_mesh module</a></li>
+<li><a class="reference internal" href="#module-implementations.datatype_classes.mesh">implementations.datatype_classes.mesh module</a></li>
+<li><a class="reference internal" href="#module-implementations.datatype_classes.particles">implementations.datatype_classes.particles module</a></li>
+<li><a class="reference internal" href="#module-implementations.datatype_classes">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="implementations.controller_classes.html"
+                        title="previous chapter">implementations.controller_classes package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="implementations.problem_classes.html"
+                        title="next chapter">implementations.problem_classes package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/pySDC/implementations.datatype_classes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="implementations.problem_classes.html" title="implementations.problem_classes package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="implementations.controller_classes.html" title="implementations.controller_classes package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="implementations.html" >implementations package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Robert Speck.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
